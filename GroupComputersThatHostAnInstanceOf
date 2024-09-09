@@ -1,0 +1,48 @@
+<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <TypeDefinitions>
+            <EntityTypes>
+                  <ClassTypes>
+                        <ClassType ID="#text('ID')#.Group" Accessibility="Public" Abstract="false" Base="MSIL!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+                  </ClassTypes>
+            </EntityTypes>
+      </TypeDefinitions>
+      <Monitoring>
+            <Discoveries>
+                  <Discovery ID="#text('ID')#.Group.DiscoveryRule" Enabled="true" Target="#text('ID')#.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+                        <Category>Discovery</Category>
+                        <DiscoveryTypes>
+                              <DiscoveryRelationship TypeID="MSIL!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+                        </DiscoveryTypes>
+                        <DataSource ID="GroupPopulationDataSource" TypeID="SC!Microsoft.SystemCenter.GroupPopulator">
+                              <RuleId>$MPElement$</RuleId>
+                              <GroupInstanceId>$MPElement[Name="#text('ID')#.Group"]$</GroupInstanceId>
+                              <MembershipRules>
+                                    <MembershipRule>
+                                          <MonitoringClass>$MPElement[Name="Windows!Microsoft.Windows.Computer"]$</MonitoringClass>
+                                          <RelationshipClass>$MPElement[Name="MSIL!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+                                          <Expression>
+                                                <Contains>
+                                                      <MonitoringClass>$MPElement[Name="#text('Hosting instances based on class...')#"]$</MonitoringClass>
+                                                </Contains>
+                                          </Expression>
+                                    </MembershipRule>
+                              </MembershipRules>
+                        </DataSource>
+                  </Discovery>
+            </Discoveries>
+      </Monitoring>
+      <LanguagePacks>
+            <LanguagePack ID="ENU" IsDefault="true">
+                  <DisplayStrings>
+                        <DisplayString ElementID="#text('ID')#.Group">
+                              <Name>#text('Friendly name')#</Name>
+                              <Description>#text('Description')#</Description>
+                        </DisplayString>
+                        <DisplayString ElementID="#text('ID')#.Group.DiscoveryRule">
+                              <Name>Populate #text('Friendly name')#</Name>
+                              <Description>This discovery rule populates the group #text('Friendly name')#</Description>
+                        </DisplayString>
+                  </DisplayStrings>
+            </LanguagePack>
+      </LanguagePacks>
+</ManagementPackFragment>
